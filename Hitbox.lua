@@ -21,6 +21,7 @@ local Tab = Window:CreateTab("Hitbox", 4483362458)
 
 local hitboxSize = 10
 local hitboxAtivo = false
+local originalSizes = {}
 
 Tab:CreateSlider({
     Name = "Tamanho da Hitbox",
@@ -53,6 +54,12 @@ Tab:CreateToggle({
                             for _, partName in ipairs(parts) do
                                 local part = player.Character:FindFirstChild(partName)
                                 if part and part:IsA("BasePart") then
+                                    if not originalSizes[player.Name] then
+                                        originalSizes[player.Name] = {}
+                                    end
+                                    if not originalSizes[player.Name][partName] then
+                                        originalSizes[player.Name][partName] = part.Size
+                                    end
                                     part.Size = Vector3.new(hitboxSize, hitboxSize, hitboxSize)
                                     part.Transparency = 0.6
                                     part.Material = Enum.Material.ForceField
@@ -70,6 +77,21 @@ Tab:CreateToggle({
                 Content = "Voltando ao normal...",
                 Duration = 3
             })
+
+            for _, player in ipairs(game.Players:GetPlayers()) do
+                if player ~= game.Players.LocalPlayer and player.Character and originalSizes[player.Name] then
+                    for partName, originalSize in pairs(originalSizes[player.Name]) do
+                        local part = player.Character:FindFirstChild(partName)
+                        if part and part:IsA("BasePart") then
+                            part.Size = originalSize
+                            part.Transparency = 0
+                            part.Material = Enum.Material.Plastic
+                            part.CanCollide = true
+                        end
+                    end
+                end
+            end
+            originalSizes = {} -- limpa geral depois de restaurar
         end
     end,
 })
