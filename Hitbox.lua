@@ -22,6 +22,24 @@ local Tab = Window:CreateTab("Hitbox", 4483362458)
 local hitboxSize = 10
 local hitboxAtivo = false
 local originalSizes = {}
+local localPlayer = game.Players.LocalPlayer
+
+local function resetHitboxes()
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        if player ~= localPlayer and player.Character and originalSizes[player.Name] then
+            for partName, originalSize in pairs(originalSizes[player.Name]) do
+                local part = player.Character:FindFirstChild(partName)
+                if part and part:IsA("BasePart") then
+                    part.Size = originalSize
+                    part.Transparency = 0
+                    part.Material = Enum.Material.Plastic
+                    part.CanCollide = true
+                end
+            end
+        end
+    end
+    originalSizes = {}
+end
 
 Tab:CreateSlider({
     Name = "Tamanho da Hitbox",
@@ -39,6 +57,7 @@ Tab:CreateToggle({
     CurrentValue = false,
     Callback = function(Value)
         hitboxAtivo = Value
+
         if hitboxAtivo then
             Rayfield:Notify({
                 Title = "Hitbox Ativada",
@@ -49,7 +68,7 @@ Tab:CreateToggle({
             task.spawn(function()
                 while hitboxAtivo do
                     for _, player in ipairs(game.Players:GetPlayers()) do
-                        if player ~= game.Players.LocalPlayer and player.Character then
+                        if player ~= localPlayer and player.Character and player.Character:FindFirstChild("Humanoid") then
                             local parts = {"Head", "UpperTorso", "LowerTorso", "HumanoidRootPart"}
                             for _, partName in ipairs(parts) do
                                 local part = player.Character:FindFirstChild(partName)
@@ -60,7 +79,9 @@ Tab:CreateToggle({
                                     if not originalSizes[player.Name][partName] then
                                         originalSizes[player.Name][partName] = part.Size
                                     end
-                                    part.Size = Vector3.new(hitboxSize, hitboxSize, hitboxSize)
+                                    if part.Size ~= Vector3.new(hitboxSize, hitboxSize, hitboxSize) then
+                                        part.Size = Vector3.new(hitboxSize, hitboxSize, hitboxSize)
+                                    end
                                     part.Transparency = 0.6
                                     part.Material = Enum.Material.ForceField
                                     part.CanCollide = false
@@ -77,21 +98,7 @@ Tab:CreateToggle({
                 Content = "Voltando ao normal...",
                 Duration = 3
             })
-
-            for _, player in ipairs(game.Players:GetPlayers()) do
-                if player ~= game.Players.LocalPlayer and player.Character and originalSizes[player.Name] then
-                    for partName, originalSize in pairs(originalSizes[player.Name]) do
-                        local part = player.Character:FindFirstChild(partName)
-                        if part and part:IsA("BasePart") then
-                            part.Size = originalSize
-                            part.Transparency = 0
-                            part.Material = Enum.Material.Plastic
-                            part.CanCollide = true
-                        end
-                    end
-                end
-            end
-            originalSizes = {} -- limpa geral depois de restaurar
+            resetHitboxes()
         end
     end,
 })
