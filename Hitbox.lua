@@ -43,7 +43,7 @@ end
 
 Tab:CreateSlider({
     Name = "Tamanho da Hitbox",
-    Range = {2, 30},
+    Range = {2, 50},
     Increment = 1,
     Suffix = "x",
     CurrentValue = hitboxSize,
@@ -82,7 +82,7 @@ Tab:CreateToggle({
                                     if part.Size ~= Vector3.new(hitboxSize, hitboxSize, hitboxSize) then
                                         part.Size = Vector3.new(hitboxSize, hitboxSize, hitboxSize)
                                     end
-                                    part.Transparency = 0.6
+                                    part.Transparency = 0.90
                                     part.Material = Enum.Material.ForceField
                                     part.CanCollide = false
                                 end
