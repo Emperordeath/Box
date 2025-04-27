@@ -102,3 +102,35 @@ Tab:CreateToggle({
         end
     end,
 })
+
+-- BOTÃO DE PUXAR TODO MUNDO
+Tab:CreateButton({
+    Name = "Puxar Todos pra Mim",
+    Callback = function()
+        local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
+        local hrp = character:WaitForChild("HumanoidRootPart")
+        local offset = 5 -- Espaçamento entre cada player
+
+        local count = 0
+        for _, player in ipairs(game.Players:GetPlayers()) do
+            if player ~= localPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                local enemyHRP = player.Character.HumanoidRootPart
+
+                -- Deixa travado no ar
+                enemyHRP.Anchored = true
+
+                -- Organiza eles na frente
+                local positionOffset = Vector3.new((count % 5) * offset, 0, math.floor(count / 5) * offset)
+                enemyHRP.CFrame = hrp.CFrame * CFrame.new(positionOffset.X, 0, -10 - positionOffset.Z)
+
+                count = count + 1
+            end
+        end
+
+        Rayfield:Notify({
+            Title = "Puxados com Sucesso",
+            Content = "Todos reunidos pra execução!",
+            Duration = 3
+        })
+    end,
+})
