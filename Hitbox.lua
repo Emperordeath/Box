@@ -19,6 +19,9 @@ local Window = Rayfield:CreateWindow({
 
 local Tab = Window:CreateTab("Hitbox", 4483362458)
 
+-- Seções Bonitonas
+Tab:CreateSection("Configurações de Hitbox")
+
 local hitboxSize = 10
 local hitboxAtivo = false
 local originalSizes = {}
@@ -103,34 +106,40 @@ Tab:CreateToggle({
     end,
 })
 
--- BOTÃO DE PUXAR TODO MUNDO
-Tab:CreateButton({
-    Name = "Puxar Todos pra Mim",
-    Callback = function()
-        local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
-        local hrp = character:WaitForChild("HumanoidRootPart")
-        local offset = 5 -- Espaçamento entre cada player
+Tab:CreateSection("Controle de Jogadores")
 
-        local count = 0
-        for _, player in ipairs(game.Players:GetPlayers()) do
-            if player ~= localPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-                local enemyHRP = player.Character.HumanoidRootPart
+-- Variável do puxão
+local puxarJogadores = false
 
-                -- Deixa travado no ar
-                enemyHRP.Anchored = true
+Tab:CreateToggle({
+    Name = "Puxar Jogadores pra Frente",
+    CurrentValue = false,
+    Callback = function(Value)
+        puxarJogadores = Value
 
-                -- Organiza eles na frente
-                local positionOffset = Vector3.new((count % 5) * offset, 0, math.floor(count / 5) * offset)
-                enemyHRP.CFrame = hrp.CFrame * CFrame.new(positionOffset.X, 0, -10 - positionOffset.Z)
+        if puxarJogadores then
+            Rayfield:Notify({
+                Title = "Puxar Ativado",
+                Content = "Inimigos grudados em você, chefia!",
+                Duration = 3
+            })
 
-                count = count + 1
-            end
+            task.spawn(function()
+                while puxarJogadores do
+                    for _, player in ipairs(game.Players:GetPlayers()) do
+                        if player ~= localPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") and localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                            player.Character.HumanoidRootPart.CFrame = localPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(3, 0, -5)
+                        end
+                    end
+                    task.wait(0.2) -- Frequência boa pra manter eles presos sem crashar
+                end
+            end)
+        else
+            Rayfield:Notify({
+                Title = "Puxar Desativado",
+                Content = "Inimigos liberados!",
+                Duration = 3
+            })
         end
-
-        Rayfield:Notify({
-            Title = "Puxados com Sucesso",
-            Content = "Todos reunidos pra execução!",
-            Duration = 3
-        })
     end,
 })
