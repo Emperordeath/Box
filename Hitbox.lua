@@ -33,7 +33,7 @@ HomeTab:CreateLabel("⚠️ Existe risco de expulsão ou banimento.")
 HomeTab:CreateLabel("⚙️ Um sistema de bypass está em desenvolvimento e será adicionado em futuras atualizações.")
 
 -- Segunda Aba: Hitbox
-local Tab = Window:CreateTab("Hitbox", 4483362458)
+local Tab = Window:CreateTab("Scripts", 4483362458)
 
 Tab:CreateSection("Configurações de Hitbox")
 
