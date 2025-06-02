@@ -411,6 +411,3 @@ ExplanationTab:CreateLabel("")
 
 ExplanationTab:CreateLabel("Puxar Jogadores pra Frente:")
 ExplanationTab:CreateLabel("Puxa jogadores inimigos para perto de você, facilitando o ataque.")
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Emperordeath/A/refs/heads/main/README.lua", true))() ofusca esse script
-
