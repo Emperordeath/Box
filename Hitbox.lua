@@ -1,413 +1,397 @@
-local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+local _q9w3z = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
-local Window = Rayfield:CreateWindow({
-Name = "Death Hub | Hitbox",
-LoadingTitle = "Death Hub",
-LoadingSubtitle = "By: DeathBringer|IamEmperorDeath",
-ConfigurationSaving = {
-Enabled = true,
-FolderName = "DeathHubConfigs",
-FileName = "HitboxConfig"
-},
-Discord = {
-Enabled = false,
-Invite = "",
-RememberJoins = false
-},
-KeySystem = false,
+local _x2k7m = _q9w3z:CreateWindow({
+   Name = "Death Hub | Hitbox",
+   LoadingTitle = "Death Hub",
+   LoadingSubtitle = "By: DeathBringer|IamEmperorDeath",
+   ConfigurationSaving = {
+      Enabled = true,
+      FolderName = "DeathHubConfigs",
+      FileName = "HitboxConfig"
+   },
+   Discord = {
+      Enabled = false,
+      Invite = "",
+      RememberJoins = false
+   },
+   KeySystem = false,
 })
 
--- Primeira Aba: Home / Informações
-local HomeTab = Window:CreateTab("Início", 4483362457)
+-- Home Tab
+local _h4j8p = _x2k7m:CreateTab("Início", 4483362457)
 
-HomeTab:CreateSection("Sobre o Script")
+_h4j8p:CreateSection("Sobre o Script")
 
-HomeTab:CreateLabel("Criado por: Deathbringer 🇮🇹")
-HomeTab:CreateLabel("Este script será atualizado frequentemente!")
-HomeTab:CreateLabel("Fique atento às novas funções e melhorias.")
+_h4j8p:CreateLabel("Criado por: Deathbringer 🇮🇹")
+_h4j8p:CreateLabel("Este script será atualizado frequentemente!")
+_h4j8p:CreateLabel("Fique atento às novas funções e melhorias.")
 
-HomeTab:CreateSection("⚠️ Avisos Importantes")
+_h4j8p:CreateSection("⚠️ Avisos Importantes")
 
-HomeTab:CreateLabel("⚠️ Muitos jogos podem detectar alterações de hitbox.")
-HomeTab:CreateLabel("⚠️ Existe risco de expulsão ou banimento.")
-HomeTab:CreateLabel("⚙️ Um sistema de bypass está em desenvolvimento e será adicionado em futuras atualizações.")
+_h4j8p:CreateLabel("⚠️ Muitos jogos podem detectar alterações de hitbox.")
+_h4j8p:CreateLabel("⚠️ Existe risco de expulsão ou banimento.")
+_h4j8p:CreateLabel("⚙️ Um sistema de bypass está em desenvolvimento e será adicionado em futuras atualizações.")
 
--- Segunda Aba: Hitbox
-local Tab = Window:CreateTab("Scripts", 4483362458)
+-- Scripts Tab
+local _t5r1v = _x2k7m:CreateTab("Scripts", 4483362458)
 
-Tab:CreateSection("Configurações de Hitbox")
+_t5r1v:CreateSection("Configurações de Hitbox")
 
-local hitboxSize = 10
-local hitboxAtivo = false
-local puxarJogadores = false
-local limitarDistancia = false
-local alvoEspecifico = false
-local jogadorAlvo = nil
-local originalSizes = {}
-local localPlayer = game.Players.LocalPlayer
-local PlayersAfetados = 0
+local _z8n4b = 10
+local _p6m2y = false
+local _k3f7w = false
+local _j9d5q = false
+local _g2t8x = false
+local _r4c1l = nil
+local _m7v3s = {}
+local _y1b9p = game.Players.LocalPlayer
+local _e5h6u = 0
 
-local PlayersLabel = Tab:CreateLabel("Jogadores Afetados: 0")
+local _n3q2j = _t5r1v:CreateLabel("Jogadores Afetados: 0")
 
-local function resetHitboxes()
-for _, player in ipairs(game.Players:GetPlayers()) do
-if player ~= localPlayer and player.Character and originalSizes[player.Name] then
-for partName, originalSize in pairs(originalSizes[player.Name]) do
-local part = player.Character:FindFirstChild(partName)
-if part and part:IsA("BasePart") then
-part.Size = originalSize
-part.Transparency = 0
-part.Material = Enum.Material.Plastic
-part.CanCollide = true
+local function _u4i8k()
+   for _, _pl in ipairs(game.Players:GetPlayers()) do
+      if _pl ~= _y1b9p and _pl.Character and _m7v3s[_pl.Name] then
+         for _pn, _os in pairs(_m7v3s[_pl.Name]) do
+            local _pt = _pl.Character:FindFirstChild(_pn)
+            if _pt and _pt:IsA("BasePart") then
+               _pt.Size = _os
+               _pt.Transparency = 0
+               _pt.Material = Enum.Material.Plastic
+               _pt.CanCollide = true
+            end
+         end
+      end
+   end
+   _m7v3s = {}
+   _e5h6u = 0
+   _n3q2j:Set("Jogadores Afetados: " .. _e5h6u)
 end
-end
-end
-end
-originalSizes = {}
-PlayersAfetados = 0
-PlayersLabel:Set("Jogadores Afetados: "..PlayersAfetados)
-end
 
-Tab:CreateSlider({
-Name = "Tamanho da Hitbox",
-Range = {2, 130},
-Increment = 1,
-Suffix = "x",
-CurrentValue = hitboxSize,
-Callback = function(Value)
-hitboxSize = Value
-end,
+_t5r1v:CreateSlider({
+   Name = "Tamanho da Hitbox",
+   Range = {2, 130},
+   Increment = 1,
+   Suffix = "x",
+   CurrentValue = _z8n4b,
+   Callback = function(_val)
+      _z8n4b = _val
+   end,
 })
 
--- Função para obter lista atualizada de jogadores
-local function getPlayerList()
-local playerNames = {"Todos"}
-for _, player in ipairs(game.Players:GetPlayers()) do
-if player ~= localPlayer then
-table.insert(playerNames, player.Name)
-end
-end
-return playerNames
+local function _f2l9r()
+   local _pnl = {"Todos"}
+   for _, _pl in ipairs(game.Players:GetPlayers()) do
+      if _pl ~= _y1b9p then
+         table.insert(_pnl, _pl.Name)
+      end
+   end
+   return _pnl
 end
 
--- Criar dropdown após a janela estar pronta
-local Dropdown
+local _w6x3m
 task.spawn(function()
-while not Dropdown do
-Dropdown = Tab:CreateDropdown({
-Name = "Selecionar Jogador Alvo",
-Options = getPlayerList(),
-CurrentOption = "Todos",
-Callback = function(Option)
-if Option == "Todos" then
-alvoEspecifico = false
-jogadorAlvo = nil
-else
-alvoEspecifico = true
-jogadorAlvo = Option
-end
-end,
-})
-wait(1)
-end
+   while not _w6x3m do
+      _w6x3m = _t5r1v:CreateDropdown({
+         Name = "Selecionar Jogador Alvo",
+         Options = _f2l9r(),
+         CurrentOption = "Todos",
+         Callback = function(_opt)
+            if _opt == "Todos" then
+               _g2t8x = false
+               _r4c1l = nil
+            else
+               _g2t8x = true
+               _r4c1l = _opt
+            end
+         end,
+      })
+      wait(1)
+   end
 end)
 
--- Atualizar lista de jogadores periodicamente
 task.spawn(function()
-while task.wait(5) do
-if Dropdown then
-Dropdown:Refresh(getPlayerList(), true)
-end
-end
+   while task.wait(5) do
+      if _w6x3m then
+         _w6x3m:Refresh(_f2l9r(), true)
+      end
+   end
 end)
 
--- Conectar evento para atualizar quando um jogador entrar/sair
 game.Players.PlayerAdded:Connect(function()
-if Dropdown then
-Dropdown:Refresh(getPlayerList(), true)
-end
+   if _w6x3m then
+      _w6x3m:Refresh(_f2l9r(), true)
+   end
 end)
 
 game.Players.PlayerRemoving:Connect(function()
-if Dropdown then
-Dropdown:Refresh(getPlayerList(), true)
-end
+   if _w6x3m then
+      _w6x3m:Refresh(_f2l9r(), true)
+   end
 end)
 
-Tab:CreateToggle({
-Name = "Ativar Hitbox Expandida",
-CurrentValue = false,
-Callback = function(Value)
-hitboxAtivo = Value
-
-if hitboxAtivo then  
-        task.spawn(function()  
-            while hitboxAtivo do  
-                local count = 0  
-                for _, player in ipairs(game.Players:GetPlayers()) do  
-                    -- Verificar se é para afetar todos ou apenas o alvo específico  
-                    if (not alvoEspecifico or (alvoEspecifico and player.Name == jogadorAlvo)) and   
-                       player ~= localPlayer and player.Character and player.Character:FindFirstChild("Humanoid") then  
-                          
-                        local root = player.Character:FindFirstChild("HumanoidRootPart")  
-                        local myRoot = localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart")  
-                        if root and myRoot then  
-                            local distance = (root.Position - myRoot.Position).Magnitude  
-                            if not limitarDistancia or distance <= 800 then  
-                                local parts = {"Head", "UpperTorso", "LowerTorso", "HumanoidRootPart"}  
-                                for _, partName in ipairs(parts) do  
-                                    local part = player.Character:FindFirstChild(partName)  
-                                    if part and part:IsA("BasePart") then  
-                                        if not originalSizes[player.Name] then  
-                                            originalSizes[player.Name] = {}  
-                                        end  
-                                        if not originalSizes[player.Name][partName] then  
-                                            originalSizes[player.Name][partName] = part.Size  
-                                        end  
-                                        part.Size = Vector3.new(hitboxSize, hitboxSize, hitboxSize)  
-                                        part.Transparency = 0.90  
-                                        part.Material = Enum.Material.ForceField  
-                                        part.CanCollide = false  
-                                        count = count + 1  
-                                    end  
-                                end  
-                            else  
-                                if originalSizes[player.Name] then  
-                                    for partName, originalSize in pairs(originalSizes[player.Name]) do  
-                                        local part = player.Character:FindFirstChild(partName)  
-                                        if part and part:IsA("BasePart") then  
-                                            part.Size = originalSize  
-                                            part.Transparency = 0  
-                                            part.Material = Enum.Material.Plastic  
-                                            part.CanCollide = true  
-                                        end  
-                                    end  
-                                    originalSizes[player.Name] = nil  
-                                end  
-                            end  
-                        end  
-                    end  
-                end  
-                PlayersAfetados = math.floor(count/4)  
-                PlayersLabel:Set("Jogadores Afetados: "..PlayersAfetados)  
-                task.wait(1)  
-            end  
-        end)  
-    else  
-        resetHitboxes()  
-    end  
-end,
-
+_t5r1v:CreateToggle({
+   Name = "Ativar Hitbox Expandida",
+   CurrentValue = false,
+   Callback = function(_val)
+      _p6m2y = _val
+      if _p6m2y then
+         task.spawn(function()
+            while _p6m2y do
+               local _cnt = 0
+               for _, _pl in ipairs(game.Players:GetPlayers()) do
+                  if (not _g2t8x or (_g2t8x and _pl.Name == _r4c1l)) and
+                     _pl ~= _y1b9p and _pl.Character and _pl.Character:FindFirstChild("Humanoid") then
+                     local _rt = _pl.Character:FindFirstChild("HumanoidRootPart")
+                     local _mrt = _y1b9p.Character and _y1b9p.Character:FindFirstChild("HumanoidRootPart")
+                     if _rt and _mrt then
+                        local _dst = (_rt.Position - _mrt.Position).Magnitude
+                        if not _j9d5q or _dst <= 800 then
+                           local _pts = {"Head", "UpperTorso", "LowerTorso", "HumanoidRootPart"}
+                           for _, _pn in ipairs(_pts) do
+                              local _pt = _pl.Character:FindFirstChild(_pn)
+                              if _pt and _pt:IsA("BasePart") then
+                                 if not _m7v3s[_pl.Name] then
+                                    _m7v3s[_pl.Name] = {}
+                                 end
+                                 if not _m7v3s[_pl.Name][_pn] then
+                                    _m7v3s[_pl.Name][_pn] = _pt.Size
+                                 end
+                                 _pt.Size = Vector3.new(_z8n4b, _z8n4b, _z8n4b)
+                                 _pt.Transparency = 0.90
+                                 _pt.Material = Enum.Material.ForceField
+                                 _pt.CanCollide = false
+                                 _cnt = _cnt + 1
+                              end
+                           end
+                        else
+                           if _m7v3s[_pl.Name] then
+                              for _pn, _os in pairs(_m7v3s[_pl.Name]) do
+                                 local _pt = _pl.Character:FindFirstChild(_pn)
+                                 if _pt and _pt:IsA("BasePart") then
+                                    _pt.Size = _os
+                                    _pt.Transparency = 0
+                                    _pt.Material = Enum.Material.Plastic
+                                    _pt.CanCollide = true
+                                 end
+                              end
+                              _m7v3s[_pl.Name] = nil
+                           end
+                        end
+                     end
+                  end
+               end
+               _e5h6u = math.floor(_cnt / 4)
+               _n3q2j:Set("Jogadores Afetados: " .. _e5h6u)
+               task.wait(1)
+            end
+         end)
+      else
+         _u4i8k()
+      end
+   end,
 })
 
-Tab:CreateToggle({
-Name = "Limitar Hitbox a 800 Studs",
-CurrentValue = false,
-Callback = function(Value)
-limitarDistancia = Value
-end,
+_t5r1v:CreateToggle({
+   Name = "Limitar Hitbox a 800 Studs",
+   CurrentValue = false,
+   Callback = function(_val)
+      _j9d5q = _val
+   end,
 })
 
-Tab:CreateSection("Controle de Jogadores")
+_t5r1v:CreateSection("Controle de Jogadores")
 
-Tab:CreateToggle({
-Name = "Puxar Jogadores pra Frente",
-CurrentValue = false,
-Callback = function(Value)
-puxarJogadores = Value
-
-if puxarJogadores then  
-        task.spawn(function()  
-            while puxarJogadores do  
-                for _, player in ipairs(game.Players:GetPlayers()) do  
-                    if (not alvoEspecifico or (alvoEspecifico and player.Name == jogadorAlvo)) and   
-                       player ~= localPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") and   
-                       localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart") then  
-                        player.Character.HumanoidRootPart.CFrame = localPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(3, 0, -5)  
-                    end  
-                end  
-                task.wait(0.2)  
-            end  
-        end)  
-    end  
-end,
-
+_t5r1v:CreateToggle({
+   Name = "Puxar Jogadores pra Frente",
+   CurrentValue = false,
+   Callback = function(_val)
+      _k3f7w = _val
+      if _k3f7w then
+         task.spawn(function()
+            while _k3f7w do
+               for _, _pl in ipairs(game.Players:GetPlayers()) do
+                  if (not _g2t8x or (_g2t8x and _pl.Name == _r4c1l)) and
+                     _pl ~= _y1b9p and _pl.Character and _pl.Character:FindFirstChild("HumanoidRootPart") and
+                     _y1b9p.Character and _y1b9p.Character:FindFirstChild("HumanoidRootPart") then
+                     _pl.Character.HumanoidRootPart.CFrame = _y1b9p.Character.HumanoidRootPart.CFrame * CFrame.new(3, 0, -5)
+                  end
+               end
+               task.wait(0.2)
+            end
+         end)
+      end
+   end,
 })
 
--- Terceira Aba: Hitbox (Team)
-local TeamTab = Window:CreateTab("Hitbox (Team)", 4483362460)
+-- Team Tab
+local _b8v2n = _x2k7m:CreateTab("Hitbox (Team)", 4483362460)
 
-TeamTab:CreateSection("Configurações de Hitbox por Time")
+_b8v2n:CreateSection("Configurações de Hitbox por Time")
 
-local teamHitboxSize = 10
-local teamHitboxAtivo = false
-local puxarInimigos = false
-local teamOriginalSizes = {}
-local teamPlayersAfetados = 0
+local _c6t4y = 10
+local _d3m9j = false
+local _f7p1q = false
+local _l2s5x = {}
+local _r8h6k = 0
 
-local TeamPlayersLabel = TeamTab:CreateLabel("Inimigos Afetados: 0")
+local _v4n3w = _b8v2n:CreateLabel("Inimigos Afetados: 0")
 
-local function isEnemy(player)
--- Verifica se o jogador é do time inimigo
-if game:GetService("Players").LocalPlayer.Team then
-return player.Team ~= game:GetService("Players").LocalPlayer.Team
-else
--- Se não houver sistema de times, considera todos como inimigos (exceto você)
-return player ~= localPlayer
-end
+local function _i5k9z(_pl)
+   if game:GetService("Players").LocalPlayer.Team then
+      return _pl.Team ~= game:GetService("Players").LocalPlayer.Team
+   else
+      return _pl ~= _y1b9p
+   end
 end
 
-local function resetTeamHitboxes()
-for _, player in ipairs(game.Players:GetPlayers()) do
-if player ~= localPlayer and player.Character and teamOriginalSizes[player.Name] then
-for partName, originalSize in pairs(teamOriginalSizes[player.Name]) do
-local part = player.Character:FindFirstChild(partName)
-if part and part:IsA("BasePart") then
-part.Size = originalSize
-part.Transparency = 0
-part.Material = Enum.Material.Plastic
-part.CanCollide = true
-end
-end
-end
-end
-teamOriginalSizes = {}
-teamPlayersAfetados = 0
-TeamPlayersLabel:Set("Inimigos Afetados: "..teamPlayersAfetados)
+local function _o7g2r()
+   for _, _pl in ipairs(game.Players:GetPlayers()) do
+      if _pl ~= _y1b9p and _pl.Character and _l2s5x[_pl.Name] then
+         for _pn, _os in pairs(_l2s5x[_pl.Name]) do
+            local _pt = _pl.Character:FindFirstChild(_pn)
+            if _pt and _pt:IsA("BasePart") then
+               _pt.Size = _os
+               _pt.Transparency = 0
+               _pt.Material = Enum.Material.Plastic
+               _pt.CanCollide = true
+            end
+         end
+      end
+   end
+   _l2s5x = {}
+   _r8h6k = 0
+   _v4n3w:Set("Inimigos Afetados: " .. _r8h6k)
 end
 
-TeamTab:CreateSlider({
-Name = "Tamanho da Hitbox (Inimigos)",
-Range = {2, 130},
-Increment = 1,
-Suffix = "x",
-CurrentValue = teamHitboxSize,
-Callback = function(Value)
-teamHitboxSize = Value
-end,
+_b8v2n:CreateSlider({
+   Name = "Tamanho da Hitbox (Inimigos)",
+   Range = {2, 130},
+   Increment = 1,
+   Suffix = "x",
+   CurrentValue = _c6t4y,
+   Callback = function(_val)
+      _c6t4y = _val
+   end,
 })
 
-TeamTab:CreateToggle({
-Name = "Ativar Hitbox Expandida (Apenas Inimigos)",
-CurrentValue = false,
-Callback = function(Value)
-teamHitboxAtivo = Value
-
-if teamHitboxAtivo then  
-        task.spawn(function()  
-            while teamHitboxAtivo do  
-                local count = 0  
-                for _, player in ipairs(game.Players:GetPlayers()) do  
-                    if isEnemy(player) and player.Character and player.Character:FindFirstChild("Humanoid") then  
-                        local root = player.Character:FindFirstChild("HumanoidRootPart")  
-                        local myRoot = localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart")  
-                        if root and myRoot then  
-                            local distance = (root.Position - myRoot.Position).Magnitude  
-                            if not limitarDistancia or distance <= 800 then  
-                                local parts = {"Head", "UpperTorso", "LowerTorso", "HumanoidRootPart"}  
-                                for _, partName in ipairs(parts) do  
-                                    local part = player.Character:FindFirstChild(partName)  
-                                    if part and part:IsA("BasePart") then  
-                                        if not teamOriginalSizes[player.Name] then  
-                                            teamOriginalSizes[player.Name] = {}  
-                                        end  
-                                        if not teamOriginalSizes[player.Name][partName] then  
-                                            teamOriginalSizes[player.Name][partName] = part.Size  
-                                        end  
-                                        part.Size = Vector3.new(teamHitboxSize, teamHitboxSize, teamHitboxSize)  
-                                        part.Transparency = 0.90  
-                                        part.Material = Enum.Material.ForceField  
-                                        part.CanCollide = false  
-                                        count = count + 1  
-                                    end  
-                                end  
-                            else  
-                                if teamOriginalSizes[player.Name] then  
-                                    for partName, originalSize in pairs(teamOriginalSizes[player.Name]) do  
-                                        local part = player.Character:FindFirstChild(partName)  
-                                        if part and part:IsA("BasePart") then  
-                                            part.Size = originalSize  
-                                            part.Transparency = 0  
-                                            part.Material = Enum.Material.Plastic  
-                                            part.CanCollide = true  
-                                        end  
-                                    end  
-                                    teamOriginalSizes[player.Name] = nil  
-                                end  
-                            end  
-                        end  
-                    end  
-                end  
-                teamPlayersAfetados = math.floor(count/4)  
-                TeamPlayersLabel:Set("Inimigos Afetados: "..teamPlayersAfetados)  
-                task.wait(1)  
-            end  
-        end)  
-    else  
-        resetTeamHitboxes()  
-    end  
-end,
-
+_b8v2n:CreateToggle({
+   Name = "Ativar Hitbox Expandida (Apenas Inimigos)",
+   CurrentValue = false,
+   Callback = function(_val)
+      _d3m9j = _val
+      if _d3m9j then
+         task.spawn(function()
+            while _d3m9j do
+               local _cnt = 0
+               for _, _pl in ipairs(game.Players:GetPlayers()) do
+                  if _i5k9z(_pl) and _pl.Character and _pl.Character:FindFirstChild("Humanoid") then
+                     local _rt = _pl.Character:FindFirstChild("HumanoidRootPart")
+                     local _mrt = _y1b9p.Character and _y1b9p.Character:FindFirstChild("HumanoidRootPart")
+                     if _rt and _mrt then
+                        local _dst = (_rt.Position - _mrt.Position).Magnitude
+                        if not _j9d5q or _dst <= 800 then
+                           local _pts = {"Head", "UpperTorso", "LowerTorso", "HumanoidRootPart"}
+                           for _, _pn in ipairs(_pts) do
+                              local _pt = _pl.Character:FindFirstChild(_pn)
+                              if _pt and _pt:IsA("BasePart") then
+                                 if not _l2s5x[_pl.Name] then
+                                    _l2s5x[_pl.Name] = {}
+                                 end
+                                 if not _l2s5x[_pl.Name][_pn] then
+                                    _l2s5x[_pl.Name][_pn] = _pt.Size
+                                 end
+                                 _pt.Size = Vector3.new(_c6t4y, _c6t4y, _c6t4y)
+                                 _pt.Transparency = 0.90
+                                 _pt.Material = Enum.Material.ForceField
+                                 _pt.CanCollide = false
+                                 _cnt = _cnt + 1
+                              end
+                           end
+                        else
+                           if _l2s5x[_pl.Name] then
+                              for _pn, _os in pairs(_l2s5x[_pl.Name]) do
+                                 local _pt = _pl.Character:FindFirstChild(_pn)
+                                 if _pt and _pt:IsA("BasePart") then
+                                    _pt.Size = _os
+                                    _pt.Transparency = 0
+                                    _pt.Material = Enum.Material.Plastic
+                                    _pt.CanCollide = true
+                                 end
+                              end
+                              _l2s5x[_pl.Name] = nil
+                           end
+                        end
+                     end
+                  end
+               end
+               _r8h6k = math.floor(_cnt / 4)
+               _v4n3w:Set("Inimigos Afetados: " .. _r8h6k)
+               task.wait(1)
+            end
+         end)
+      else
+         _o7g2r()
+      end
+   end,
 })
 
-TeamTab:CreateSection("Controle de Inimigos")
+_b8v2n:CreateSection("Controle de Inimigos")
 
-TeamTab:CreateToggle({
-Name = "Puxar Inimigos pra Frente",
-CurrentValue = false,
-Callback = function(Value)
-puxarInimigos = Value
-
-if puxarInimigos then  
-        task.spawn(function()  
-            while puxarInimigos do  
-                for _, player in ipairs(game.Players:GetPlayers()) do  
-                    if isEnemy(player) and player.Character and player.Character:FindFirstChild("HumanoidRootPart") and   
-                       localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart") then  
-                        player.Character.HumanoidRootPart.CFrame = localPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(3, 0, -5)  
-                    end  
-                end  
-                task.wait(0.2)  
-            end  
-        end)  
-    end  
-end,
-
+_b8v2n:CreateToggle({
+   Name = "Puxar Inimigos pra Frente",
+   CurrentValue = false,
+   Callback = function(_val)
+      _f7p1q = _val
+      if _f7p1q then
+         task.spawn(function()
+            while _f7p1q do
+               for _, _pl in ipairs(game.Players:GetPlayers()) do
+                  if _i5k9z(_pl) and _pl.Character and _pl.Character:FindFirstChild("HumanoidRootPart") and
+                     _y1b9p.Character and _y1b9p.Character:FindFirstChild("HumanoidRootPart") then
+                     _pl.Character.HumanoidRootPart.CFrame = _y1b9p.Character.HumanoidRootPart.CFrame * CFrame.new(3, 0, -5)
+                  end
+               end
+               task.wait(0.2)
+            end
+         end)
+      end
+   end,
 })
 
--- Quarta Aba: Explicação das Funções
-local ExplanationTab = Window:CreateTab("Explicação das Funções", 4483362459)
+-- Explanation Tab
+local _a3e9t = _x2k7m:CreateTab("Explicação das Funções", 4483362459)
 
-ExplanationTab:CreateSection("Descrição das Funções")
+_a3e9t:CreateSection("Descrição das Funções")
 
-ExplanationTab:CreateLabel("Este script adiciona várias funcionalidades para manipular a hitbox dos jogadores e interagir com eles:")
+_a3e9t:CreateLabel("Este script adiciona várias funcionalidades para manipular a hitbox dos jogadores e interagir com eles:")
 
-ExplanationTab:CreateLabel("")
+_a3e9t:CreateLabel("")
 
-ExplanationTab:CreateLabel("Tamanho da Hitbox:")
-ExplanationTab:CreateLabel("Ajusta o tamanho das hitboxes dos jogadores. Pode ser configurado entre 2x e 130x de tamanho.")
+_a3e9t:CreateLabel("Tamanho da Hitbox:")
+_a3e9t:CreateLabel("Ajusta o tamanho das hitboxes dos jogadores. Pode ser configurado entre 2x e 130x de tamanho.")
 
-ExplanationTab:CreateLabel("")
+_a3e9t:CreateLabel("")
 
-ExplanationTab:CreateLabel("Ativar Hitbox Expandida:")
-ExplanationTab:CreateLabel("Ao ativar, as hitboxes dos jogadores ficam maiores, facilitando os acertos.")
+_a3e9t:CreateLabel("Ativar Hitbox Expandida:")
+_a3e9t:CreateLabel("Ao ativar, as hitboxes dos jogadores ficam maiores, facilitando os acertos.")
 
-ExplanationTab:CreateLabel("")
+_a3e9t:CreateLabel("")
 
-ExplanationTab:CreateLabel("Selecionar Jogador Alvo:")
-ExplanationTab:CreateLabel("Permite escolher um jogador específico para aplicar a hitbox expandida. Atualiza automaticamente quando jogadores entram/saem.")
+_a3e9t:CreateLabel("Selecionar Jogador Alvo:")
+_a3e9t:CreateLabel("Permite escolher um jogador específico para aplicar a hitbox expandida. Atualiza automaticamente quando jogadores entram/saem.")
 
-ExplanationTab:CreateLabel("")
+_a3e9t:CreateLabel("")
 
-ExplanationTab:CreateLabel("Hitbox (Team):")
-ExplanationTab:CreateLabel("Modo que afeta apenas jogadores inimigos, ignorando membros do seu time. Inclui opção para puxar apenas inimigos.")
+_a3e9t:CreateLabel("Hitbox (Team):")
+_a3e9t:CreateLabel("Modo que afeta apenas jogadores inimigos, ignorando membros do seu time. Inclui opção para puxar apenas inimigos.")
 
-ExplanationTab:CreateLabel("")
+_a3e9t:CreateLabel("")
 
-ExplanationTab:CreateLabel("Limitar Hitbox a 800 Studs:")
-ExplanationTab:CreateLabel("Só expande a hitbox de jogadores que estejam a até 800 studs de distância.")
+_a3e9t:CreateLabel("Limitar Hitbox a 800 Studs:")
+_a3e9t:CreateLabel("Só expande a hitbox de jogadores que estejam a até 800 studs de distância.")
 
-ExplanationTab:CreateLabel("")
+_a3e9t:CreateLabel("")
 
-ExplanationTab:CreateLabel("Puxar Jogadores pra Frente:")
-ExplanationTab:CreateLabel("Puxa jogadores inimigos para perto de você, facilitando o ataque.")
+_a3e9t:CreateLabel("Puxar Jogadores pra Frente:")
+_a3e9t:CreateLabel("Puxa jogadores inimigos para perto de você, facilitando o ataque.")
