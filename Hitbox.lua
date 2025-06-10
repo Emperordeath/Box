@@ -224,6 +224,30 @@ _t5r1v:CreateToggle({
    end,
 })
 
+_t5r1v:CreateSection("Outros Scripts")
+
+_t5r1v:CreateButton({
+   Name = "Load Fly Script",
+   Callback = function()
+      local success, error = pcall(function()
+         loadstring(game:HttpGet('https://raw.githubusercontent.com/Emperordeath/Add.fly/refs/heads/main/Add.fly.lua'))()
+      end)
+      if success then
+         game:GetService("StarterGui"):SetCore("SendNotification", {
+            Title = "Fly Script",
+            Text = "Fly script loaded successfully!",
+            Duration = 3,
+         })
+      else
+         game:GetService("StarterGui"):SetCore("SendNotification", {
+            Title = "Fly Script Error",
+            Text = "Failed to load fly script: " .. tostring(error),
+            Duration = 5,
+         })
+      end
+   end,
+})
+
 -- Team Tab
 local _b8v2n = _x2k7m:CreateTab("Hitbox (Team)", 4483362460)
 
