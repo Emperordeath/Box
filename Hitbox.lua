@@ -2,11 +2,11 @@
 local LocalPlayer = game.Players.LocalPlayer
 local allowedUsers = {8433408926, 8589764157} -- IDs dos usuários que NÃO serão kickados (você e o outro usuário)
 
-if LocalPlayer.UserId == 8622229549 then
+if LocalPlayer.UserId ==  then
    LocalPlayer:Kick("Você abusou do script, você foi banido por 1 hora")
    return -- Para a execução do script
 elseif not table.find(allowedUsers, LocalPlayer.UserId) then
-   LocalPlayer:Kick("Estamos em manutenção ⚖️")
+   LocalPlayer:Kick("Estamos em manutenção ⚖️ By: DeathTeam")
    return -- Para a execução do script
 end
 
