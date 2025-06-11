@@ -1,7 +1,12 @@
--- Verifica o usuário alvo
+-- Verifica os usuários alvos
 local LocalPlayer = game.Players.LocalPlayer
+local allowedUsers = {8433408926, 8589764157} -- IDs dos usuários que NÃO serão kickados (você e o outro usuário)
+
 if LocalPlayer.UserId == 8622229549 then
    LocalPlayer:Kick("Você abusou do script, você foi banido por 1 hora")
+   return -- Para a execução do script
+elseif not table.find(allowedUsers, LocalPlayer.UserId) then
+   LocalPlayer:Kick("Estamos em manutenção ⚖️")
    return -- Para a execução do script
 end
 
@@ -360,7 +365,7 @@ _b8v2n:CreateToggle({
                         else
                            if _l2s5x[_pl.Name] then
                               for _pn, _os in pairs(_l2s5x[_pl.Name]) do
-                                 local _pt = _pl.Character:FindFirstChildatenin(_pn)
+                                 local _pt = _pl.Character:FindFirstChild(_pn)
                                  if _pt and _pt:IsA("BasePart") then
                                     _pt.Size = _os
                                     _pt.Transparency = 0
