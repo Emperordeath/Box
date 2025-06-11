@@ -3,7 +3,7 @@ local LocalPlayer = game.Players.LocalPlayer
 local allowedUsers = {8433408926, 8589764157, 8622229549} -- IDs dos usuÃ¡rios que NÃƒO serÃ£o kickados (vocÃª e o outro usuÃ¡rio)
 
 if not table.find(allowedUsers, LocalPlayer.UserId) then
-   LocalPlayer:Kick("Estamos em manutenÃ§Ã£o âš–ï¸ By: DeathTeam")
+   LocalPlayer:Kick("Estamos em manutenção By: DeathTeam")
    return -- Para a execuÃ§Ã£o do script
 end
 
