@@ -1,12 +1,16 @@
--- Verifica os usuários alvos
+-- Verifica os usuÃ¡rios alvos
 local LocalPlayer = game.Players.LocalPlayer
-local allowedUsers = {8433408926, 8589764157} -- IDs dos usuários que NÃO serão kickados (você e o outro usuário)
+local allowedUsers = {8433408926, 8589764157, 8622229549} -- IDs dos usuÃ¡rios que NÃƒO serÃ£o kickados (vocÃª e o outro usuÃ¡rio)
 
+if not table.find(allowedUsers, LocalPlayer.UserId) then
+   LocalPlayer:Kick("Estamos em manutenÃ§Ã£o âš–ï¸ By: DeathTeam")
+   return -- Para a execuÃ§Ã£o do script
+end
 
 -- Carrega o Rayfield
 local _q9w3z = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
--- Criação da janela principal
+-- CriaÃ§Ã£o da janela principal
 local _x2k7m = _q9w3z:CreateWindow({
    Name = "Death Hub | Hitbox",
    LoadingTitle = "Death Hub",
@@ -25,20 +29,20 @@ local _x2k7m = _q9w3z:CreateWindow({
 })
 
 -- Home Tab
-local _h4j8p = _x2k7m:CreateTab("Início", 4483362457)
+local _h4j8p = _x2k7m:CreateTab("InÃ­cio", 4483362457)
 _h4j8p:CreateSection("Sobre o Script")
-_h4j8p:CreateLabel("Criado por: Deathbringer 🇮🇹")
-_h4j8p:CreateLabel("Este script será atualizado frequentemente!")
-_h4j8p:CreateLabel("Fique atento às novas funções e melhorias.")
+_h4j8p:CreateLabel("Criado por: Deathbringer ðŸ‡®ðŸ‡¹")
+_h4j8p:CreateLabel("Este script serÃ¡ atualizado frequentemente!")
+_h4j8p:CreateLabel("Fique atento Ã s novas funÃ§Ãµes e melhorias.")
 
-_h4j8p:CreateSection("⚠️ Avisos Importantes")
-_h4j8p:CreateLabel("⚠️ Muitos jogos podem detectar alterações de hitbox.")
-_h4j8p:CreateLabel("⚠️ Existe risco de expulsão ou banimento.")
-_h4j8p:CreateLabel("⚙️ Um sistema de bypass está em desenvolvimento e será adicionado em futuras atualizações.")
+_h4j8p:CreateSection("âš ï¸ Avisos Importantes")
+_h4j8p:CreateLabel("âš ï¸ Muitos jogos podem detectar alteraÃ§Ãµes de hitbox.")
+_h4j8p:CreateLabel("âš ï¸ Existe risco de expulsÃ£o ou banimento.")
+_h4j8p:CreateLabel("âš™ï¸ Um sistema de bypass estÃ¡ em desenvolvimento e serÃ¡ adicionado em futuras atualizaÃ§Ãµes.")
 
 -- Scripts Tab
 local _t5r1v = _x2k7m:CreateTab("Scripts", 4483362458)
-_t5r1v:CreateSection("Configurações de Hitbox")
+_t5r1v:CreateSection("ConfiguraÃ§Ãµes de Hitbox")
 
 local _z8n4b = 10
 local _p6m2y = false
@@ -227,7 +231,7 @@ _t5r1v:CreateToggle({
    end,
 })
 
--- Novo botão para ativar o Fly
+-- Novo botÃ£o para ativar o Fly
 _t5r1v:CreateButton({
    Name = "Ativar Fly",
    Callback = function()
@@ -242,7 +246,7 @@ _t5r1v:CreateButton({
                Ignore = {
                   Name = "OK",
                   Callback = function()
-                     -- Ação opcional ao clicar em "OK"
+                     -- AÃ§Ã£o opcional ao clicar em "OK"
                   end
                }
             }
@@ -251,20 +255,20 @@ _t5r1v:CreateButton({
    end,
 })
 
--- Botão para "Quer ver o código novamente?"
+-- BotÃ£o para "Quer ver o cÃ³digo novamente?"
 _t5r1v:CreateButton({
-   Name = "Quer ver o código novamente?",
+   Name = "Quer ver o cÃ³digo novamente?",
    Callback = function()
       _q9w3z:Notify({
-         Title = "Código do Script",
-         Content = "O código-fonte está disponível em: https://raw.githubusercontent.com/Emperordeath/Box/refs/heads/main/Hitbox.lua. Abra no seu navegador para visualizar!",
+         Title = "CÃ³digo do Script",
+         Content = "O cÃ³digo-fonte estÃ¡ disponÃ­vel em: https://raw.githubusercontent.com/Emperordeath/Box/refs/heads/main/Hitbox.lua. Abra no seu navegador para visualizar!",
          Duration = 10,
          Image = 4483362458,
          Actions = {
             Ignore = {
                Name = "OK",
                Callback = function()
-                  -- Ação opcional ao clicar em "OK"
+                  -- AÃ§Ã£o opcional ao clicar em "OK"
                end
             }
          }
@@ -274,7 +278,7 @@ _t5r1v:CreateButton({
 
 -- Team Tab
 local _b8v2n = _x2k7m:CreateTab("Hitbox (Team)", 4483362460)
-_b8v2n:CreateSection("Configurações de Hitbox por Time")
+_b8v2n:CreateSection("ConfiguraÃ§Ãµes de Hitbox por Time")
 
 local _c6t4y = 10
 local _d3m9j = false
@@ -407,9 +411,9 @@ _b8v2n:CreateToggle({
 })
 
 -- Explanation Tab
-local _a3e9t = _x2k7m:CreateTab("Explicação das Funções", 4483362459)
-_a3e9t:CreateSection("Descrição das Funções")
-_a3e9t:CreateLabel("Este script adiciona várias funcionalidades para manipular a hitbox dos jogadores e interagir com eles:")
+local _a3e9t = _x2k7m:CreateTab("ExplicaÃ§Ã£o das FunÃ§Ãµes", 4483362459)
+_a3e9t:CreateSection("DescriÃ§Ã£o das FunÃ§Ãµes")
+_a3e9t:CreateLabel("Este script adiciona vÃ¡rias funcionalidades para manipular a hitbox dos jogadores e interagir com eles:")
 _a3e9t:CreateLabel("")
 _a3e9t:CreateLabel("Tamanho da Hitbox:")
 _a3e9t:CreateLabel("Ajusta o tamanho das hitboxes dos jogadores. Pode ser configurado entre 2x e 130x de tamanho.")
@@ -418,13 +422,13 @@ _a3e9t:CreateLabel("Ativar Hitbox Expandida:")
 _a3e9t:CreateLabel("Ao ativar, as hitboxes dos jogadores ficam maiores, facilitando os acertos.")
 _a3e9t:CreateLabel("")
 _a3e9t:CreateLabel("Selecionar Jogador Alvo:")
-_a3e9t:CreateLabel("Permite escolher um jogador específico para aplicar a hitbox expandida. Atualiza automaticamente quando jogadores entram/saem.")
+_a3e9t:CreateLabel("Permite escolher um jogador especÃ­fico para aplicar a hitbox expandida. Atualiza automaticamente quando jogadores entram/saem.")
 _a3e9t:CreateLabel("")
 _a3e9t:CreateLabel("Hitbox (Team):")
-_a3e9t:CreateLabel("Modo que afeta apenas jogadores inimigos, ignorando membros do seu time. Inclui opção para puxar apenas inimigos.")
+_a3e9t:CreateLabel("Modo que afeta apenas jogadores inimigos, ignorando membros do seu time. Inclui opÃ§Ã£o para puxar apenas inimigos.")
 _a3e9t:CreateLabel("")
 _a3e9t:CreateLabel("Limitar Hitbox a 800 Studs:")
-_a3e9t:CreateLabel("Só expande a hitbox de jogadores que estejam a até 800 studs de distância.")
+_a3e9t:CreateLabel("SÃ³ expande a hitbox de jogadores que estejam a atÃ© 800 studs de distÃ¢ncia.")
 _a3e9t:CreateLabel("")
 _a3e9t:CreateLabel("Puxar Jogadores pra Frente:")
-_a3e9t:CreateLabel("Puxa jogadores inimigos para perto de você, facilitando o ataque.")
+_a3e9t:CreateLabel("Puxa jogadores inimigos para perto de vocÃª, facilitando o ataque.")
