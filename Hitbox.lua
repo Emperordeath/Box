@@ -1,5 +1,14 @@
+-- Verifica o usuário alvo
+local LocalPlayer = game.Players.LocalPlayer
+if LocalPlayer.UserId == 8622229549 then
+   LocalPlayer:Kick("Você abusou do script, você foi banido por 1 hora")
+   return -- Para a execução do script
+end
+
+-- Carrega o Rayfield
 local _q9w3z = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
+-- Criação da janela principal
 local _x2k7m = _q9w3z:CreateWindow({
    Name = "Death Hub | Hitbox",
    LoadingTitle = "Death Hub",
@@ -19,22 +28,18 @@ local _x2k7m = _q9w3z:CreateWindow({
 
 -- Home Tab
 local _h4j8p = _x2k7m:CreateTab("Início", 4483362457)
-
 _h4j8p:CreateSection("Sobre o Script")
-
 _h4j8p:CreateLabel("Criado por: Deathbringer 🇮🇹")
 _h4j8p:CreateLabel("Este script será atualizado frequentemente!")
 _h4j8p:CreateLabel("Fique atento às novas funções e melhorias.")
 
 _h4j8p:CreateSection("⚠️ Avisos Importantes")
-
 _h4j8p:CreateLabel("⚠️ Muitos jogos podem detectar alterações de hitbox.")
 _h4j8p:CreateLabel("⚠️ Existe risco de expulsão ou banimento.")
 _h4j8p:CreateLabel("⚙️ Um sistema de bypass está em desenvolvimento e será adicionado em futuras atualizações.")
 
 -- Scripts Tab
 local _t5r1v = _x2k7m:CreateTab("Scripts", 4483362458)
-
 _t5r1v:CreateSection("Configurações de Hitbox")
 
 local _z8n4b = 10
@@ -224,33 +229,8 @@ _t5r1v:CreateToggle({
    end,
 })
 
-_t5r1v:CreateSection("Outros Scripts")
-
-_t5r1v:CreateButton({
-   Name = "Load Fly Script",
-   Callback = function()
-      local success, error = pcall(function()
-         loadstring(game:HttpGet('https://raw.githubusercontent.com/Emperordeath/Add.fly/refs/heads/main/Add.fly.lua'))()
-      end)
-      if success then
-         game:GetService("StarterGui"):SetCore("SendNotification", {
-            Title = "Fly Script",
-            Text = "Fly script loaded successfully!",
-            Duration = 3,
-         })
-      else
-         game:GetService("StarterGui"):SetCore("SendNotification", {
-            Title = "Fly Script Error",
-            Text = "Failed to load fly script: " .. tostring(error),
-            Duration = 5,
-         })
-      end
-   end,
-})
-
 -- Team Tab
 local _b8v2n = _x2k7m:CreateTab("Hitbox (Team)", 4483362460)
-
 _b8v2n:CreateSection("Configurações de Hitbox por Time")
 
 local _c6t4y = 10
@@ -385,37 +365,23 @@ _b8v2n:CreateToggle({
 
 -- Explanation Tab
 local _a3e9t = _x2k7m:CreateTab("Explicação das Funções", 4483362459)
-
 _a3e9t:CreateSection("Descrição das Funções")
-
 _a3e9t:CreateLabel("Este script adiciona várias funcionalidades para manipular a hitbox dos jogadores e interagir com eles:")
-
 _a3e9t:CreateLabel("")
-
 _a3e9t:CreateLabel("Tamanho da Hitbox:")
 _a3e9t:CreateLabel("Ajusta o tamanho das hitboxes dos jogadores. Pode ser configurado entre 2x e 130x de tamanho.")
-
 _a3e9t:CreateLabel("")
-
 _a3e9t:CreateLabel("Ativar Hitbox Expandida:")
 _a3e9t:CreateLabel("Ao ativar, as hitboxes dos jogadores ficam maiores, facilitando os acertos.")
-
 _a3e9t:CreateLabel("")
-
 _a3e9t:CreateLabel("Selecionar Jogador Alvo:")
 _a3e9t:CreateLabel("Permite escolher um jogador específico para aplicar a hitbox expandida. Atualiza automaticamente quando jogadores entram/saem.")
-
 _a3e9t:CreateLabel("")
-
 _a3e9t:CreateLabel("Hitbox (Team):")
 _a3e9t:CreateLabel("Modo que afeta apenas jogadores inimigos, ignorando membros do seu time. Inclui opção para puxar apenas inimigos.")
-
 _a3e9t:CreateLabel("")
-
 _a3e9t:CreateLabel("Limitar Hitbox a 800 Studs:")
 _a3e9t:CreateLabel("Só expande a hitbox de jogadores que estejam a até 800 studs de distância.")
-
 _a3e9t:CreateLabel("")
-
 _a3e9t:CreateLabel("Puxar Jogadores pra Frente:")
 _a3e9t:CreateLabel("Puxa jogadores inimigos para perto de você, facilitando o ataque.")
