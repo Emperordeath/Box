@@ -229,6 +229,51 @@ _t5r1v:CreateToggle({
    end,
 })
 
+-- Novo botão para ativar o Fly
+_t5r1v:CreateButton({
+   Name = "Ativar Fly",
+   Callback = function()
+      pcall(function()
+         loadstring(game:HttpGet('https://raw.githubusercontent.com/Emperordeath/Add.fly/refs/heads/main/Add.fly.lua'))()
+         _q9w3z:Notify({
+            Title = "Fly Ativado",
+            Content = "O script de Fly foi executado com sucesso!",
+            Duration = 5,
+            Image = 4483362458,
+            Actions = {
+               Ignore = {
+                  Name = "OK",
+                  Callback = function()
+                     -- Ação opcional ao clicar em "OK"
+                  end
+               }
+            }
+         })
+      end)
+   end,
+})
+
+-- Botão para "Quer ver o código novamente?"
+_t5r1v:CreateButton({
+   Name = "Quer ver o código novamente?",
+   Callback = function()
+      _q9w3z:Notify({
+         Title = "Código do Script",
+         Content = "O código-fonte está disponível em: https://raw.githubusercontent.com/Emperordeath/Box/refs/heads/main/Hitbox.lua. Abra no seu navegador para visualizar!",
+         Duration = 10,
+         Image = 4483362458,
+         Actions = {
+            Ignore = {
+               Name = "OK",
+               Callback = function()
+                  -- Ação opcional ao clicar em "OK"
+               end
+            }
+         }
+      })
+   end,
+})
+
 -- Team Tab
 local _b8v2n = _x2k7m:CreateTab("Hitbox (Team)", 4483362460)
 _b8v2n:CreateSection("Configurações de Hitbox por Time")
@@ -315,7 +360,7 @@ _b8v2n:CreateToggle({
                         else
                            if _l2s5x[_pl.Name] then
                               for _pn, _os in pairs(_l2s5x[_pl.Name]) do
-                                 local _pt = _pl.Character:FindFirstChild(_pn)
+                                 local _pt = _pl.Character:FindFirstChildatenin(_pn)
                                  if _pt and _pt:IsA("BasePart") then
                                     _pt.Size = _os
                                     _pt.Transparency = 0
