@@ -1,12 +1,322 @@
-local v0=game:GetService("Players").LocalPlayer;local v1={8433408926 -0 ,8589764599 -(416 + 26) ,8622229549,2664466417,8023988586 -761013667 };if  not table.find(v1,v0.UserId) then local v40=0;while true do if (v40==(658 -(161 + 497))) then v0:Kick("ðŸ”’ Acesso Negado | DeathTeam | By: IamEmperorDeath");return;end end end local v2=loadstring(game:HttpGet("https://sirius.com/rayfield"))();local v3=v2:CreateWindow({Name="DeathTeam | Hitbox Expander",LoadingTitle="DeathTeam Loading...",LoadingSubtitle="By: IamEmperorDeath",ConfigurationSaving={Enabled=true,FolderName="DeathTeamConfigs",FileName="HitboxSettings"},Discord={Enabled=false,Invite="",RememberJoins=false},KeySystem=false});v2:Notify({Title="DeathTeam Iniciado",Content="Bem-vindo! Script carregado com sucesso.\nBy: IamEmperorDeath",Duration=6.5,Image=4483362458,Actions={Ignore={Name="OK",Callback=function() end}}});local v4=v3:CreateTab("InÃ­cio",4483362658 -(43 + 158) );v4:CreateSection("ðŸ”° Sobre o Script");v4:CreateLabel("Criado por: IamEmperorDeath");v4:CreateLabel("VersÃ£o: 3.0 | DeathTeam Edition");v4:CreateLabel("AtualizaÃ§Ãµes frequentes!");v4:CreateSection("âš ï¸ Avisos Importantes");v4:CreateLabel("âš ï¸ Risco de detecÃ§Ã£o em alguns jogos");v4:CreateLabel("âš ï¸ Use por sua conta e risco");v4:CreateLabel("ðŸ›¡ï¸ Sistema de bypass em desenvolvimento");local v5=v3:CreateTab("Scripts",4415138636 --68223822 );local v6=9 + 1 ;local v7=false;local v8=false;local v9=false;local v10=false;local v11=nil;local v12={};local v13=772 -(201 + 571) ;local v14=v5:CreateLabel("Jogadores Afetados: 0");local function v15() local v25=1138 -(116 + 1022) ;while true do if (v25==(4 -3)) then v13=0 + 0 ;v14:Set("Jogadores Afetados: "   .. v13 );break;end if (v25==0) then for v44,v45 in ipairs(game.Players:GetPlayers()) do if ((v45~=v0) and v45.Character and v12[v45.Name]) then for v48,v49 in pairs(v12[v45.Name]) do local v50=0 -0 ;local v51;while true do if (v50==(0 -0)) then v51=v45.Character:FindFirstChild(v48);if (v51 and v51:IsA("BasePart")) then local v58=859 -(814 + 45) ;while true do if (v58==0) then v51.Size=v49;v51.Transparency=0 -0 ;v58=1 + 0 ;end if (v58==(1 + 0)) then v51.Material=Enum.Material.Plastic;v51.CanCollide=true;break;end end end break;end end end end end v12={};v25=1;end end end v5:CreateSlider({Name="Tamanho da Hitbox",Range={2,231 -101 },Increment=1081 -(1020 + 60) ,Suffix="x",CurrentValue=v6,Callback=function(v26) v6=v26;end});local function v16() local v27=1423 -(630 + 793) ;local v28;while true do local v41=0;while true do if (0==v41) then if (v27==(3 -2)) then return v28;end if (v27==0) then local v46=0 -0 ;while true do if (v46==(0 + 0)) then v28={"Todos"};for v54,v55 in ipairs(game.Players:GetPlayers()) do if (v55~=v0) then table.insert(v28,v55.Name);end end v46=1748 -(760 + 987) ;end if ((1914 -(1789 + 124))==v46) then v27=767 -(745 + 21) ;break;end end end break;end end end end local v17=v5:CreateDropdown({Name="Selecionar Jogador Alvo",Options=v16(),CurrentOption="Todos",Callback=function(v29) v10=v29~="Todos" ;v11=(v10 and v29) or nil ;end});game.Players.PlayerAdded:Connect(function() v17:Refresh(v16(),true);end);game.Players.PlayerRemoving:Connect(function() v17:Refresh(v16(),true);end);v5:CreateToggle({Name="Ativar Hitbox Expandida",CurrentValue=false,Callback=function(v30) local v31=0 + 0 ;while true do if (v31==(0 -0)) then v7=v30;if v7 then coroutine.wrap(function() local v47=0;while true do if (v47==(0 -0)) then while v7 do local v56=0;local v57;while true do if (v56==0) then local v59=0 + 0 ;while true do if (v59==(1 + 0)) then v56=1056 -(87 + 968) ;break;end if (v59==(0 -0)) then v57=0 + 0 ;for v68,v69 in ipairs(game.Players:GetPlayers()) do if (( not v10 or (v69.Name==v11)) and (v69~=v0) and v69.Character) then for v70,v71 in ipairs({"Head","UpperTorso","LowerTorso","HumanoidRootPart"}) do local v72=v69.Character:FindFirstChild(v71);if (v72 and v72:IsA("BasePart")) then local v73=1817 -(1703 + 114) ;while true do if (v73==1) then v72.Size=Vector3.new(v6,v6,v6);v72.Transparency=701.9 -(376 + 325) ;v73=2;end if (v73==(4 -1)) then v57=v57 + (2 -1) ;break;end if ((0 + 0)==v73) then if  not v12[v69.Name] then v12[v69.Name]={};end if  not v12[v69.Name][v71] then v12[v69.Name][v71]=v72.Size;end v73=1;end if (v73==(4 -2)) then v72.Material=Enum.Material.ForceField;v72.CanCollide=false;v73=17 -(9 + 5) ;end end end end end end v59=1;end end end if (v56==(378 -(85 + 291))) then task.wait(1265.5 -(243 + 1022) );break;end if (v56==(3 -2)) then v13=math.floor(v57/4 );v14:Set("Jogadores Afetados: "   .. v13 );v56=2;end end end v15();break;end end end)();else v15();end break;end end end});v5:CreateToggle({Name="Limitar a 800 Studs",CurrentValue=false,Callback=function(v32) v9=v32;end});v5:CreateSection("Controle de Jogadores");v5:CreateToggle({Name="Puxar Jogadores pra Frente",CurrentValue=false,Callback=function(v33) local v34=0 + 0 ;while true do if (v34==(1180 -(1123 + 57))) then v8=v33;if v8 then coroutine.wrap(function() while v8 do local v52=0 + 0 ;local v53;while true do if (v52==0) then v53=254 -(163 + 91) ;while true do if (v53==(1930 -(1869 + 61))) then for v60,v61 in ipairs(game.Players:GetPlayers()) do if (( not v10 or (v61.Name==v11)) and (v61~=v0) and v61.Character and v61.Character:FindFirstChild("HumanoidRootPart") and v0.Character and v0.Character:FindFirstChild("HumanoidRootPart")) then v61.Character.HumanoidRootPart.CFrame=v0.Character.HumanoidRootPart.CFrame * CFrame.new(3,0 + 0 , -(17 -12)) ;end end task.wait(0.2 -0 );break;end end break;end end end end)();end break;end end end});v5:CreateButton({Name="Ativar Fly Hack",Callback=function() local v35=0;while true do if (v35==0) then loadstring(game:HttpGet("https://raw.githubusercontent.com/Emperordeath/Add.fly/main/Add.fly.lua"))();v2:Notify({Title="Fly Ativado",Content="Fly hack carregado com sucesso!\nBy: IamEmperorDeath",Duration=1 + 4 ,Image=4277993275 --205369183 ,Actions={Ignore={Name="OK",Callback=function() end}}});break;end end end});local v18=v3:CreateTab("Hitbox (Team)",4483362718 -(190 + 68) );local v19=10;local v20=false;local v21=v18:CreateLabel("Inimigos Afetados: 0");local function v22(v36) if v0.Team then return v36.Team~=v0.Team ;else return v36~=v0 ;end end v18:CreateToggle({Name="Ativar Hitbox para Inimigos",CurrentValue=false,Callback=function(v37) v20=v37;end});local v23=v3:CreateTab("Owners",4483362458);v23:CreateSection("Acesso Exclusivo");v23:CreateInput({Name="Insira a Chave",PlaceholderText="Chave: C2",RemoveTextAfterFocusLost=false,Callback=function(v38) if (v38=="C2") then local v42=0 -0 ;local v43;while true do if ((1850 -(1409 + 441))==v42) then v43=0;while true do if (v43==(718 -(15 + 703))) then v2:Notify({Title="ACESSO CONCEDIDO",Content="Script exclusivo liberado!",Duration=3 + 2 ,Image=4483362458,Actions={Ignore={Name="OK",Callback=function() end}}});loadstring(game:HttpGet("https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/script"))();break;end end break;end end else v2:Notify({Title="CHAVE INCORRETA",Content="Tente novamente!",Duration=3,Image=4483362896 -(262 + 176) });end end});local v24=v3:CreateTab("Ajuda",4483362459);v24:CreateSection("ðŸ“Œ InstruÃ§Ãµes");v24:CreateLabel("1. Ajuste o tamanho da hitbox no slider");v24:CreateLabel("2. Selecione 'Todos' ou um jogador especÃ­fico");v24:CreateLabel("3. Ative/Desative com o toggle principal");v24:CreateButton({Name="Ver CÃ³digo Fonte",Callback=function() local v39=1721 -(345 + 1376) ;while true do if (v39==(688 -(198 + 490))) then setclipboard("https://github.com/Emperordeath/DeathTeam-Hitbox");v2:Notify({Title="Link Copiado!",Content="URL do GitHub copiada para sua Ã¡rea de transferÃªncia.",Duration=5});break;end end end});v2:Notify({Title="DeathTeam Pronto",Content="Todas as funÃ§Ãµes foram carregadas!\nBy: IamEmperorDeath",Duration=26 -20 ,Image=4483362458 -0 });
--- âš ï¸ WARNING: integrity protected!
 --[[
- .____                  ________ ___.    _____                           __                
- |    |    __ _______   \_____  \\_ |___/ ____\_ __  ______ ____ _____ _/  |_  ___________ 
- |    |   |  |  \__  \   /   |   \| __ \   __\  |  \/  ___// ___\\__  \\   __\/  _ \_  __ \
- |    |___|  |  // __ \_/    |    \ \_\ \  | |  |  /\___ \\  \___ / __ \|  | (  <_> )  | \/
- |_______ \____/(____  /\_______  /___  /__| |____//____  >\___  >____  /__|  \____/|__|   
-         \/          \/         \/    \/                \/     \/     \/                   
-          \_Welcome to LuaObfuscator.com   (Alpha 0.10.9) ~  Much Love, Ferib 
+  ██████╗ ███████╗ █████╗ ████████╗██╗  ██╗████████╗███████╗ █████╗ ███╗   ███╗
+  ██╔══██╗██╔════╝██╔══██╗╚══██╔══╝██║  ██║╚══██╔══╝██╔════╝██╔══██╗████╗ ████║
+  ██║  ██║█████╗  ███████║   ██║   ███████║   ██║   █████╗  ███████║██╔████╔██║
+  ██║  ██║██╔══╝  ██╔══██║   ██║   ██╔══██║   ██║   ██╔══╝  ██╔══██║██║╚██╔╝██║
+  ██████╔╝███████╗██║  ██║   ██║   ██║  ██║   ██║   ███████╗██║  ██║██║ ╚═╝ ██║
+  ╚═════╝ ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝
+  DeathTeam Hitbox Expander | By: IamEmperorDeath
+]]
 
-]]--
+-- ==================== CONFIGURAÇÃO INICIAL ====================
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local AllowedUsers = {
+    8433408926,  -- Usuário 1
+    8589764157,  -- Usuário 2
+    8622229549,  -- Usuário 3
+    2664466417,  -- Usuário 4
+    7262974919   -- Usuário 5
+}
+
+-- Verificação de permissão
+if not table.find(AllowedUsers, LocalPlayer.UserId) then
+    LocalPlayer:Kick("🔒 Acesso Negado | DeathTeam | By: IamEmperorDeath")
+    return
+end
+
+-- ==================== INTERFACE RAYFIELD ====================
+local Rayfield = loadstring(game:HttpGet('https://sirius.com/rayfield'))()
+local Window = Rayfield:CreateWindow({
+    Name = "DeathTeam | Hitbox Expander",
+    LoadingTitle = "DeathTeam Loading...",
+    LoadingSubtitle = "By: IamEmperorDeath",
+    ConfigurationSaving = {
+        Enabled = true,
+        FolderName = "DeathTeamConfigs",
+        FileName = "HitboxSettings"
+    },
+    Discord = {
+        Enabled = false,
+        Invite = "",
+        RememberJoins = false
+    },
+    KeySystem = false
+})
+
+-- Notificação de boas-vindas
+Rayfield:Notify({
+    Title = "DeathTeam Iniciado",
+    Content = "Bem-vindo! Script carregado com sucesso.\nBy: IamEmperorDeath",
+    Duration = 6.5,
+    Image = 4483362458,
+    Actions = {
+        Ignore = {
+            Name = "OK",
+            Callback = function() end
+        }
+    }
+})
+
+-- ==================== ABA INÍCIO ====================
+local HomeTab = Window:CreateTab("Início", 4483362457)
+HomeTab:CreateSection("🔰 Sobre o Script")
+HomeTab:CreateLabel("Criado por: IamEmperorDeath")
+HomeTab:CreateLabel("Versão: 3.0 | DeathTeam Edition")
+HomeTab:CreateLabel("Atualizações frequentes!")
+HomeTab:CreateSection("⚠️ Avisos Importantes")
+HomeTab:CreateLabel("⚠️ Risco de detecção em alguns jogos")
+HomeTab:CreateLabel("⚠️ Use por sua conta e risco")
+HomeTab:CreateLabel("🛡️ Sistema de bypass em desenvolvimento")
+
+-- ==================== ABA SCRIPTS ====================
+local ScriptsTab = Window:CreateTab("Scripts", 4483362458)
+
+-- Variáveis
+local HitboxSize = 10
+local EnableHitbox = false
+local PullPlayers = false
+local LimitDistance = false
+local TargetSpecific = false
+local TargetPlayer = nil
+local OriginalSizes = {}
+local AffectedPlayers = 0
+local AffectedLabel = ScriptsTab:CreateLabel("Jogadores Afetados: 0")
+
+-- Função de reset
+local function ResetHitboxes()
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        if player ~= LocalPlayer and player.Character and OriginalSizes[player.Name] then
+            for partName, originalSize in pairs(OriginalSizes[player.Name]) do
+                local part = player.Character:FindFirstChild(partName)
+                if part and part:IsA("BasePart") then
+                    part.Size = originalSize
+                    part.Transparency = 0
+                    part.Material = Enum.Material.Plastic
+                    part.CanCollide = true
+                end
+            end
+        end
+    end
+    OriginalSizes = {}
+    AffectedPlayers = 0
+    AffectedLabel:Set("Jogadores Afetados: " .. AffectedPlayers)
+end
+
+-- Controles
+ScriptsTab:CreateSlider({
+    Name = "Tamanho da Hitbox",
+    Range = {2, 130},
+    Increment = 1,
+    Suffix = "x",
+    CurrentValue = HitboxSize,
+    Callback = function(value)
+        HitboxSize = value
+    end
+})
+
+-- Sistema de seleção de jogadores
+local function GetPlayerList()
+    local list = {"Todos"}
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        if player ~= LocalPlayer then
+            table.insert(list, player.Name)
+        end
+    end
+    return list
+end
+
+local PlayerDropdown = ScriptsTab:CreateDropdown({
+    Name = "Selecionar Jogador Alvo",
+    Options = GetPlayerList(),
+    CurrentOption = "Todos",
+    Callback = function(option)
+        TargetSpecific = (option ~= "Todos")
+        TargetPlayer = (TargetSpecific and option) or nil
+    end
+})
+
+-- Atualização dinâmica
+game.Players.PlayerAdded:Connect(function()
+    PlayerDropdown:Refresh(GetPlayerList(), true)
+end)
+
+game.Players.PlayerRemoving:Connect(function()
+    PlayerDropdown:Refresh(GetPlayerList(), true)
+end)
+
+-- Toggle principal
+ScriptsTab:CreateToggle({
+    Name = "Ativar Hitbox Expandida",
+    CurrentValue = false,
+    Callback = function(value)
+        EnableHitbox = value
+        if EnableHitbox then
+            coroutine.wrap(function()
+                while EnableHitbox do
+                    local count = 0
+                    for _, player in ipairs(game.Players:GetPlayers()) do
+                        if (not TargetSpecific or player.Name == TargetPlayer) and
+                           player ~= LocalPlayer and player.Character then
+                            for _, partName in ipairs({"Head", "UpperTorso", "LowerTorso", "HumanoidRootPart"}) do
+                                local part = player.Character:FindFirstChild(partName)
+                                if part and part:IsA("BasePart") then
+                                    if not OriginalSizes[player.Name] then OriginalSizes[player.Name] = {} end
+                                    if not OriginalSizes[player.Name][partName] then
+                                        OriginalSizes[player.Name][partName] = part.Size
+                                    end
+                                    
+                                    part.Size = Vector3.new(HitboxSize, HitboxSize, HitboxSize)
+                                    part.Transparency = 0.9
+                                    part.Material = Enum.Material.ForceField
+                                    part.CanCollide = false
+                                    count = count + 1
+                                end
+                            end
+                        end
+                    end
+                    AffectedPlayers = math.floor(count / 4)
+                    AffectedLabel:Set("Jogadores Afetados: " .. AffectedPlayers)
+                    task.wait(0.5)
+                end
+                ResetHitboxes()
+            end)()
+        else
+            ResetHitboxes()
+        end
+    end
+})
+
+-- Funções extras
+ScriptsTab:CreateToggle({
+    Name = "Limitar a 800 Studs",
+    CurrentValue = false,
+    Callback = function(value)
+        LimitDistance = value
+    end
+})
+
+ScriptsTab:CreateSection("Controle de Jogadores")
+
+ScriptsTab:CreateToggle({
+    Name = "Puxar Jogadores pra Frente",
+    CurrentValue = false,
+    Callback = function(value)
+        PullPlayers = value
+        if PullPlayers then
+            coroutine.wrap(function()
+                while PullPlayers do
+                    for _, player in ipairs(game.Players:GetPlayers()) do
+                        if (not TargetSpecific or player.Name == TargetPlayer) and
+                           player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") and
+                           LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                            player.Character.HumanoidRootPart.CFrame = LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(3, 0, -5)
+                        end
+                    end
+                    task.wait(0.2)
+                end
+            end)()
+        end
+    end
+})
+
+ScriptsTab:CreateButton({
+    Name = "Ativar Fly Hack",
+    Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/Emperordeath/Add.fly/main/Add.fly.lua'))()
+        Rayfield:Notify({
+            Title = "Fly Ativado",
+            Content = "Fly hack carregado com sucesso!\nBy: IamEmperorDeath",
+            Duration = 5,
+            Image = 4483362458,
+            Actions = {
+                Ignore = {
+                    Name = "OK",
+                    Callback = function() end
+                }
+            }
+        })
+    end
+})
+
+-- ==================== ABA TEAM ====================
+local TeamTab = Window:CreateTab("Hitbox (Team)", 4483362460)
+local EnemyHitboxSize = 10
+local EnableEnemyHitbox = false
+local EnemyAffectedLabel = TeamTab:CreateLabel("Inimigos Afetados: 0")
+
+-- Função para verificar inimigos
+local function IsEnemy(player)
+    if LocalPlayer.Team then
+        return player.Team ~= LocalPlayer.Team
+    else
+        return player ~= LocalPlayer
+    end
+end
+
+TeamTab:CreateToggle({
+    Name = "Ativar Hitbox para Inimigos",
+    CurrentValue = false,
+    Callback = function(value)
+        EnableEnemyHitbox = value
+        -- Implementação similar à hitbox normal
+    end
+})
+
+-- ==================== ABA OWNERS ====================
+local OwnersTab = Window:CreateTab("Owners", 4483362458)
+OwnersTab:CreateSection("Acesso Exclusivo")
+OwnersTab:CreateInput({
+    Name = "Insira a Chave",
+    PlaceholderText = "Chave: C2",
+    RemoveTextAfterFocusLost = false,
+    Callback = function(input)
+        if input == "C2" then
+            Rayfield:Notify({
+                Title = "ACESSO CONCEDIDO",
+                Content = "Script exclusivo liberado!",
+                Duration = 5,
+                Image = 4483362458,
+                Actions = {
+                    Ignore = {
+                        Name = "OK",
+                        Callback = function() end
+                    }
+                }
+            })
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/script"))()
+        else
+            Rayfield:Notify({
+                Title = "CHAVE INCORRETA",
+                Content = "Tente novamente!",
+                Duration = 3,
+                Image = 4483362458
+            })
+        end
+    end
+})
+
+-- ==================== ABA AJUDA ====================
+local HelpTab = Window:CreateTab("Ajuda", 4483362459)
+HelpTab:CreateSection("📌 Instruções")
+HelpTab:CreateLabel("1. Ajuste o tamanho da hitbox no slider")
+HelpTab:CreateLabel("2. Selecione 'Todos' ou um jogador específico")
+HelpTab:CreateLabel("3. Ative/Desative com o toggle principal")
+HelpTab:CreateButton({
+    Name = "Ver Código Fonte",
+    Callback = function()
+        setclipboard("https://github.com/Emperordeath/DeathTeam-Hitbox")
+        Rayfield:Notify({
+            Title = "Link Copiado!",
+            Content = "URL do GitHub copiada para sua área de transferência.",
+            Duration = 5
+        })
+    end
+})
+
+-- ==================== FIM DO SCRIPT ====================
+Rayfield:Notify({
+    Title = "DeathTeam Pronto",
+    Content = "Todas as funções foram carregadas!\nBy: IamEmperorDeath",
+    Duration = 6,
+    Image = 4483362458
+})
