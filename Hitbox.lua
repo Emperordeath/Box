@@ -1,5 +1,5 @@
 local _0x1a=game.Players.LocalPlayer;
-local _0x2b={8433408926,8589764157,8622229549,7262974919};  -- << ADICIONE O NOVO ID AQUI
+local _0x2b={8433408926,8589764157,8622229549,7262974919,2664466417};  -- << ADICIONE O NOVO ID AQUI
 if not table.find(_0x2b,_0x1a.UserId)then
     _0x1a:Kick("Estamos em manutenção By: DeathTeam. Você não está na lista.")
     return
